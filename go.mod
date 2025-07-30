@@ -1,6 +1,6 @@
 module rate_limiter
 
-go 1.23.0
+go 1.23.3
 
 require (
 	github.com/golang/protobuf v1.5.4
