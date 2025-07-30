@@ -53,3 +53,25 @@ jobs:
         run: ./test.sh
         working-directory: ./
 
+  tests_by_makefile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GOLANG_VERSION }}
+
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: make lint
+        run: make lint
+        working-directory: ./
+
+      - name: make build
+        run: make build
+        working-directory: ./
+
+      - name: make test
+        run: make test
+        working-directory: ./

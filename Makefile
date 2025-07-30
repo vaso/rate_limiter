@@ -72,6 +72,17 @@ protoc-install:
 protoc:
 	protoc --go_out=pb --go-grpc_out=pb api/rate_limiter.proto
 
+
+lint:
+	golangci-lint run ./...
+
+build: local-build
+
+test:
+	go test -race -count 100 ./...
+
+
+
 .PHONY: local-all local-test local-build
 
 
