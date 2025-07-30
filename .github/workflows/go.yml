@@ -29,7 +29,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: ${{ env.GOLANGCI_LINT_VERSION }}
-          working-directory: $CI_PROJECT_DIR
+          working-directory: ${{ github.workspace }}
 
   tests:
     runs-on: ubuntu-latest
@@ -47,10 +47,10 @@ jobs:
 
       - name: Unit tests
         run: go test -v -count=1 -race -timeout=1m ./...
-        working-directory: $CI_PROJECT_DIR
+        working-directory: ${{ github.workspace }}
 
       - name: Bash tests
         shell: bash
         run: ./test.sh
-        working-directory: $CI_PROJECT_DIR
+        working-directory: ${{ github.workspace }}
 
