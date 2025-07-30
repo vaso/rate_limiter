@@ -9,6 +9,7 @@ ip=133.0.4.1
 ip_mask=133.0.4.0/24
 
 make build
+make compose-up-db
 
 function testTrue() {
   if [[ "$1" == "true" ]]; then

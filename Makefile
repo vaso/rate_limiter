@@ -70,8 +70,6 @@ docker-rw:
 docker-test:
 	docker exec rate-limiter-ms go test -race -count 100 ./...
 
-compose-up:
-	docker compose up -d --build
 protoc-install:
 
 protoc:
@@ -107,6 +105,12 @@ build-img:
 
 run-img: build-img
 	docker run $(DOCKER_IMG)
+
+compose-up:
+	docker compose up -d --build
+
+compose-up-db:
+	docker compose up -d --build rate-limiter-db rate-limiter-goose
 
 
 .PHONY: local-all local-test local-build
