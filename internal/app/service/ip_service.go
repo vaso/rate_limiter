@@ -2,7 +2,6 @@ package service
 
 //nolint:gofumpt
 import (
-	"log"
 	"net/netip"
 	"slices"
 
@@ -88,12 +87,10 @@ func (s *IPService) RemoveFromWhitelist(networkStr string) (bool, error) {
 }
 
 func (s *IPService) IsInBlacklist(ipStr string) (bool, error) {
-	log.Printf("check Blacklist: %+v %s\n", s.Blacklist, ipStr)
 	return s.isInList(s.Blacklist, ipStr)
 }
 
 func (s *IPService) IsInWhitelist(ipStr string) (bool, error) {
-	log.Printf("check Whitelist: %+v %s\n", s.Whitelist, ipStr)
 	return s.isInList(s.Whitelist, ipStr)
 }
 

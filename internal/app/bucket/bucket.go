@@ -1,7 +1,6 @@
 package bucket
 
 import (
-	"log"
 	"sync"
 	"time"
 )
@@ -40,7 +39,6 @@ func (buck *bucket) Add() bool {
 	defer buck.lock.Unlock()
 
 	curTime := buck.timer.Now()
-	log.Printf("timer: %s", curTime.String())
 	newLeakDuration := curTime.Sub(buck.lastLeak)
 	leakSeconds := newLeakDuration.Seconds()
 	leakAmount := int(leakSeconds * buck.leakSpeed)

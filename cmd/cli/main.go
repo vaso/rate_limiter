@@ -97,7 +97,7 @@ func check(ctx context.Context, client pb.RateLimiterServiceClient) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("%t", res.Ok)
+	fmt.Printf("%t", res.Ok)
 	return err
 }
 

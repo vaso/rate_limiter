@@ -1,10 +1,8 @@
 package repository
 
-//nolint:gofumpt
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/jmoiron/sqlx"
 	"rate_limiter/config"
@@ -69,8 +67,7 @@ func (r *ListRepository) getList(ctx context.Context, query string) ([]string, e
 
 func (r *ListRepository) AddToWhitelist(ctx context.Context, network string) error {
 	query := "insert into whitelist(ip) values ($1)"
-	res, err := r.db.ExecContext(ctx, query, network)
-	log.Printf("Add To WL DB: %+v", res)
+	_, err := r.db.ExecContext(ctx, query, network)
 	return err
 }
 
@@ -95,7 +92,7 @@ func (r *ListRepository) RemoveFromBlacklist(ctx context.Context, network string
 func (r *ListRepository) connect() error {
 	db, err := sqlx.Open("pgx", r.dsn)
 	if err != nil {
-		return fmt.Errorf("connection error: %w", err)
+		return err
 	}
 	r.db = db
 

@@ -3,8 +3,6 @@ package service
 //nolint:gofumpt
 import (
 	"context"
-	"fmt"
-	"log"
 
 	"rate_limiter/config"
 	"rate_limiter/internal/app/repository"
@@ -24,7 +22,6 @@ func NewRateLimiterService(ctx context.Context, config config.AppConfig) (*RateL
 
 	config.IPWhitelist, _ = repo.GetWhitelist(ctx)
 	config.IPBlacklist, _ = repo.GetBlacklist(ctx)
-	fmt.Printf("updated Config: %+v\n", config)
 	ipService, err := NewIPService(config)
 	if err != nil {
 		return nil, err
@@ -44,19 +41,15 @@ func (r *RateLimiterService) Check(ctx context.Context, login, pass, ip string) 
 		return false
 	}
 	if res {
-		log.Printf("IP %s in Whitelist\n", ip)
 		return true
 	}
-	log.Printf("IP %s not in Whitelist\n", ip)
 	res, err = r.iPService.IsInBlacklist(ip)
 	if err != nil {
 		return false
 	}
 	if res {
-		log.Printf("IP %s in Blacklist\n", ip)
 		return false
 	}
-	log.Printf("IP %s not in Blacklist\n", ip)
 
 	return r.bucketService.Check(login, pass, ip)
 }
@@ -103,7 +96,6 @@ func (r *RateLimiterService) AddToWhitelist(ctx context.Context, networkStr stri
 	if !res {
 		return false, nil
 	}
-	log.Printf("Whitelist: %+v", r.iPService.Whitelist)
 	err = r.listRepository.AddToWhitelist(ctx, networkStr)
 	if err != nil {
 		return false, err

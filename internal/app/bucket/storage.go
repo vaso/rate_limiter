@@ -46,7 +46,6 @@ func (s *MemoryStorage) GetBucketByKey(cacheType string, key cache.Key) *LeakyBu
 func (s *MemoryStorage) UpdateBucket(cacheType string, key cache.Key, leakyBucket *LeakyBucket) bool {
 	cacheByType := s.getCache(cacheType)
 	res := cacheByType.Set(key, *leakyBucket)
-	// log.Printf("updated Cache for type %s: %+v\n", cacheType, cacheByType)
 
 	return res
 }
