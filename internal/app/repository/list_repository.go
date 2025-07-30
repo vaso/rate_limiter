@@ -1,5 +1,6 @@
 package repository
 
+//nolint:gofumpt
 import (
 	"context"
 	"fmt"
@@ -48,7 +49,7 @@ func (r *ListRepository) GetBlacklist(ctx context.Context) ([]string, error) {
 }
 
 func (r *ListRepository) getList(ctx context.Context, query string) ([]string, error) {
-	rows, err := r.db.QueryxContext(ctx, query)
+	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return []string{}, err
 	}
@@ -56,12 +57,12 @@ func (r *ListRepository) getList(ctx context.Context, query string) ([]string, e
 
 	var list []string
 	for rows.Next() {
-		var ip IPRecord
-		err := rows.StructScan(&ip)
+		var ip string
+		err := rows.Scan(&ip)
 		if err != nil {
 			return []string{}, err
 		}
-		list = append(list, ip.IP)
+		list = append(list, ip)
 	}
 	return list, nil
 }

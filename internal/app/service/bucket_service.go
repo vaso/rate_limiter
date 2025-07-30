@@ -1,5 +1,6 @@
 package service
 
+//nolint:gofumpt
 import (
 	"sync"
 	"time"

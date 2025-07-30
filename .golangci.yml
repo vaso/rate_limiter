@@ -37,7 +37,7 @@ linters:
     - predeclared
     - revive
     - rowserrcheck
-#    - sqlclosecheck
+    - sqlclosecheck
     - staticcheck
     - tagliatelle
     - thelper
@@ -89,7 +89,7 @@ formatters:
   enable:
     - gci
     - gofmt
-#    - gofumpt
+    - gofumpt
   settings:
     gci:
       sections:
