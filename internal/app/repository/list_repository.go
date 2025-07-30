@@ -1,5 +1,6 @@
 package repository
 
+//nolint:gofumpt
 import (
 	"context"
 	"fmt"
